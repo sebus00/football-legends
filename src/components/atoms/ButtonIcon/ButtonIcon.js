@@ -14,6 +14,10 @@ const ButtonIcon = styled.button`
   &.active {
     background-color: ${({ theme }) => theme.color.white};
   }
+
+  :focus {
+    outline: none;
+  }
 `;
 
 export default ButtonIcon;

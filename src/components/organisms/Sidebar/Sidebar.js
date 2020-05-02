@@ -13,7 +13,7 @@ const StyledWrapper = styled.nav`
   position: fixed;
   left: 0;
   top: 0;
-  padding: 25px 0;
+  padding: 20px 10px;
   width: 150px;
   height: 100vh;
   background-color: ${({ theme }) => theme.color.secondary};
@@ -32,7 +32,7 @@ const StyledLogoLink = styled(NavLink)`
   background-position: 50% 50%;
   background-size: 90%;
   border: none;
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
 `;
 
 const StyledMenuList = styled.ul`
