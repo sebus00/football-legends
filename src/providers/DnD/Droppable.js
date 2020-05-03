@@ -12,20 +12,12 @@ const Droppable = ({ accept, lastDroppedItem, onDrop, render }) => {
   });
 
   const isActive = isOver && canDrop;
-  let opacity = 1;
-  if (isActive) {
-    opacity = 1;
-  } else if (canDrop) {
-    opacity = 1;
-  }
 
   const renderProps = {
     ref: drop,
     kit: lastDroppedItem && lastDroppedItem.kit,
-    style: {
-      opacity: opacity || 1,
-      cursor: 'move',
-    },
+    isActive,
+    canDrop,
   };
 
   return render(renderProps);

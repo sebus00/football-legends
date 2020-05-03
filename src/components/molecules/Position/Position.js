@@ -4,14 +4,33 @@ import styled from 'styled-components';
 import Droppable from 'providers/DnD/Droppable';
 import emptyKit from 'assets/images/kits/empty.png';
 
-const StyledPlayer = styled.div`
+const StyledPlayerWrapper = styled.div`
+  position: relative;
+  z-index: 1;
+  padding: 10px;
+
+  ::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 128, 0, 0.6);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    z-index: -1;
+    display: ${({ canDrop }) => (canDrop ? 'block' : 'none')};
+  }
+`;
+
+const StyledPlayerKit = styled.div`
   background-image: ${({ kit }) => (kit ? `url(${kit})` : `url(${emptyKit})`)};
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
   height: 65px;
   width: 70px;
-  margin: 0;
 `;
 
 const Position = ({ accept, lastDroppedItem, onDrop }) => (
@@ -19,7 +38,11 @@ const Position = ({ accept, lastDroppedItem, onDrop }) => (
     accept={accept}
     lastDroppedItem={lastDroppedItem}
     onDrop={onDrop}
-    render={({ ref, kit, style }) => <StyledPlayer ref={ref} kit={kit} style={style} />}
+    render={({ ref, kit, isActive, canDrop }) => (
+      <StyledPlayerWrapper ref={ref} isActive={isActive} canDrop={canDrop}>
+        <StyledPlayerKit kit={kit}></StyledPlayerKit>
+      </StyledPlayerWrapper>
+    )}
   />
 );
 

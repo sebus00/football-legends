@@ -5,23 +5,15 @@ import DragDropCustomProvider from 'providers/DnD/DragDropCustomProvider';
 import Player from 'components/molecules/Player/Player';
 import Position from 'components/molecules/Position/Position';
 import pitchImage from 'assets/images/pitch.svg';
-import arsenalKit from 'assets/images/kits/arsenal.png';
-import liverpoolKit from 'assets/images/kits/liverpool.png';
-import manCityKit from 'assets/images/kits/man-city.png';
-import manUtdKit from 'assets/images/kits/man-utd.png';
-import tottenhamKit from 'assets/images/kits/tottenham.png';
-import burnleyKit from 'assets/images/kits/burnley.png';
-import astonVillaKit from 'assets/images/kits/aston-villa.png';
-import westHamKit from 'assets/images/kits/west-ham.png';
-import chelseaKit from 'assets/images/kits/chelsea.png';
-import newcastleKit from 'assets/images/kits/newcastle.png';
-import norwichKit from 'assets/images/kits/norwich.png';
+import selectCriteria from 'data/selectCriteria';
+import playersData from 'data/players';
+import Select from 'components/atoms/Select/Select';
 
 const ItemTypes = {
-  GK: 'gk',
+  GK: 'gkp',
   DEF: 'def',
   MID: 'mid',
-  ST: 'st',
+  ST: 'fwd',
 };
 
 const positions = [
@@ -38,19 +30,12 @@ const positions = [
   ItemTypes.ST,
 ];
 
-const players = [
-  { name: 'Arsenal', type: ItemTypes.GK, kit: arsenalKit },
-  { name: 'Liverpool', type: ItemTypes.DEF, kit: liverpoolKit },
-  { name: 'Man City', type: ItemTypes.DEF, kit: manCityKit },
-  { name: 'Man Utd', type: ItemTypes.DEF, kit: manUtdKit },
-  { name: 'Tottenham', type: ItemTypes.DEF, kit: tottenhamKit },
-  { name: 'Burnley', type: ItemTypes.MID, kit: burnleyKit },
-  { name: 'Aston Villa', type: ItemTypes.MID, kit: astonVillaKit },
-  { name: 'West Ham', type: ItemTypes.MID, kit: westHamKit },
-  { name: 'Chelsea', type: ItemTypes.ST, kit: chelseaKit },
-  { name: 'Newcastle', type: ItemTypes.ST, kit: newcastleKit },
-  { name: 'Norwich', type: ItemTypes.ST, kit: norwichKit },
-];
+const players = playersData.map(({ name, team, kit, position }) => ({
+  name,
+  team,
+  kit,
+  type: position,
+}));
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -83,7 +68,7 @@ const StyledPitchRow = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
 `;
 
 const PlayersPage = () => (
@@ -93,8 +78,15 @@ const PlayersPage = () => (
       droppableItems={positions}
       render={({ draggableItemsState, droppableItemsState, isDropped, handleDrop }) => {
         // eslint-disable-next-line react/prop-types
-        const mapPlayerObjectToComponent = ({ name, type, kit }) => (
-          <Player kit={kit} name={name} type={type} isDropped={isDropped(name)} key={name} />
+        const mapPlayerObjectToComponent = ({ name, team, kit, type }) => (
+          <Player
+            name={name}
+            team={team}
+            kit={kit}
+            position={type}
+            isDropped={isDropped(name)}
+            key={name}
+          />
         );
         // eslint-disable-next-line react/prop-types
         const mapPositionObjectToComponent = ({ accepts, lastDroppedItem, order }) => (
@@ -108,6 +100,7 @@ const PlayersPage = () => (
         return (
           <StyledWrapper>
             <StyledPlayersColumn>
+              <Select items={selectCriteria} />
               {draggableItemsState.map(mapPlayerObjectToComponent)}
             </StyledPlayersColumn>
             <StyledPitchWrapper>

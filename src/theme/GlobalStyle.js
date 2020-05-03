@@ -4,20 +4,20 @@ const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800');
   
   *, *::before, *::after {
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box !important;;
+    -webkit-font-smoothing: antialiased !important;;
+    -moz-osx-font-smoothing: grayscale !important;;
   }
   
   html {
-    font-size: 62.5%; 
+    font-size: 62.5% !important;
   }
   
   body {
-    padding: 0;
-    margin: 0;
-    font-size: 1.6rem;
-    font-family: "Montserrat", sans-serif;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 1.6rem !important;
+    font-family: "Montserrat", sans-serif !important;
   }
 `;
 

@@ -22,26 +22,42 @@ const DragDropCustomProvider = ({ draggableItems, droppableItems, render }) => {
   const handleDrop = useCallback(
     (index, item) => {
       const { name } = item;
-      setDroppedItemNames(update(droppedItemNames, name ? { $push: [name] } : { $push: [] }));
-      setDroppableItemsState(
-        update(droppableItemsState, {
-          [index]: {
+
+      const isAlreadyDropped = droppedItemNames.includes(name);
+      const previousDroppedItem = droppableItemsState[index].lastDroppedItem;
+      const newDroppableItems = [...droppedItemNames, ...(!isAlreadyDropped ? [name] : [])].filter(
+        itemName =>
+          !previousDroppedItem || itemName !== previousDroppedItem.name || itemName === name,
+      );
+
+      setDroppedItemNames(newDroppableItems);
+
+      const sameItem = droppableItemsState.find(
+        ({ lastDroppedItem }) => lastDroppedItem && lastDroppedItem.name === item.name,
+      );
+      const newDroppableData = {
+        ...(sameItem && {
+          [sameItem.order]: {
             lastDroppedItem: {
-              $set: item,
+              $set: null,
             },
           },
         }),
-      );
+        [index]: {
+          lastDroppedItem: {
+            $set: item,
+          },
+        },
+      };
+
+      setDroppableItemsState(update(droppableItemsState, newDroppableData));
     },
     [droppedItemNames, droppableItemsState],
   );
 
   const renderProps = {
-    droppableItemsState,
-    setDroppableItemsState,
     draggableItemsState,
-    droppedItemNames,
-    setDroppedItemNames,
+    droppableItemsState,
     isDropped,
     handleDrop,
   };
