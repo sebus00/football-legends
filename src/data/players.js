@@ -8,38 +8,112 @@ import chelseaKit from 'assets/images/kits/chelsea.png';
 const players = [
   {
     name: 'David Luiz',
-    team: 'Arsenal',
-    kit: arsenalKit,
+    team: {
+      id: 1,
+      name: 'arsenal',
+      short: 'ARS',
+      kit: arsenalKit,
+    },
     position: 'def',
   },
   {
     name: 'Salah',
-    team: 'Liverpool',
-    kit: liverpoolKit,
+    team: {
+      id: 2,
+      name: 'Liverpool',
+      short: 'LIV',
+      kit: liverpoolKit,
+    },
     position: 'mid',
   },
   {
     name: 'Mahrez',
-    team: 'Man City',
-    kit: manCityKit,
+    team: {
+      id: 3,
+      name: 'Man City',
+      short: 'MCI',
+      kit: manCityKit,
+    },
     position: 'mid',
   },
   {
     name: 'Rashford',
-    team: 'Man Utd',
-    kit: manUtdKit,
+    team: {
+      id: 4,
+      name: 'Man Utd',
+      short: 'MUN',
+      kit: manUtdKit,
+    },
     position: 'fwd',
   },
   {
     name: 'Aurier',
-    team: 'Tottenham',
-    kit: tottenhamKit,
-    position: 'fwd',
+    team: {
+      id: 5,
+      name: 'Tottenham',
+      short: 'TOT',
+      kit: tottenhamKit,
+    },
+    position: 'def',
   },
   {
     name: 'Kepa',
-    team: 'Chelsea',
-    kit: chelseaKit,
+    team: {
+      id: 6,
+      name: 'Chelsea',
+      short: 'CHE',
+      kit: chelseaKit,
+    },
+    position: 'gkp',
+  },
+  {
+    name: 'Aubameyang',
+    team: {
+      id: 1,
+      name: 'arsenal',
+      short: 'ARS',
+      kit: arsenalKit,
+    },
+    position: 'fwd',
+  },
+  {
+    name: 'Williams',
+    team: {
+      id: 4,
+      name: 'Man Utd',
+      short: 'MUN',
+      kit: manUtdKit,
+    },
+    position: 'def',
+  },
+  {
+    name: 'Pepe',
+    team: {
+      id: 1,
+      name: 'arsenal',
+      short: 'ARS',
+      kit: arsenalKit,
+    },
+    position: 'mid',
+  },
+  {
+    name: 'Alisson',
+    team: {
+      id: 2,
+      name: 'Liverpool',
+      short: 'LIV',
+      kit: liverpoolKit,
+    },
+    position: 'gkp',
+  },
+  {
+    name: 'Ederson',
+    team: {
+      id: 3,
+      name: 'Man City',
+      short: 'MCI',
+      kit: manCityKit,
+    },
     position: 'gkp',
   },
 ];

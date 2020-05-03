@@ -14,24 +14,30 @@ const StyledSelect = styled.select`
   width: 100%;
 `;
 
-const Select = ({ items }) => (
-  <StyledControl className="control">
-    <StyledSelectWrapper className="select">
-      <StyledSelect>
-        {items.map(({ type, typeLabel, typeItems }) => (
-          <optgroup label={typeLabel} key={type}>
-            {typeItems.map(({ name, label }) => (
-              <option key={name}>{label}</option>
-            ))}
-          </optgroup>
-        ))}
-      </StyledSelect>
-    </StyledSelectWrapper>
-  </StyledControl>
-);
+const Select = ({ items, value, onChange }) => {
+  return (
+    <StyledControl className="control">
+      <StyledSelectWrapper className="select is-rounded is-large is-primary">
+        <StyledSelect value={value} onChange={onChange}>
+          {items.map(({ type, typeLabel, typeItems }) => (
+            <optgroup label={typeLabel} key={type}>
+              {typeItems.map(item => (
+                <option key={item.key} value={JSON.stringify({ ...item, type })}>
+                  {item.label}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </StyledSelect>
+      </StyledSelectWrapper>
+    </StyledControl>
+  );
+};
 
 Select.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 Select.defaultProps = {

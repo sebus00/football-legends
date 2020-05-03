@@ -38,9 +38,9 @@ const Position = ({ accept, lastDroppedItem, onDrop }) => (
     accept={accept}
     lastDroppedItem={lastDroppedItem}
     onDrop={onDrop}
-    render={({ ref, kit, isActive, canDrop }) => (
+    render={({ ref, image, isActive, canDrop }) => (
       <StyledPlayerWrapper ref={ref} isActive={isActive} canDrop={canDrop}>
-        <StyledPlayerKit kit={kit}></StyledPlayerKit>
+        <StyledPlayerKit kit={image}></StyledPlayerKit>
       </StyledPlayerWrapper>
     )}
   />

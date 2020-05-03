@@ -12,10 +12,9 @@ const Droppable = ({ accept, lastDroppedItem, onDrop, render }) => {
   });
 
   const isActive = isOver && canDrop;
-
   const renderProps = {
     ref: drop,
-    kit: lastDroppedItem && lastDroppedItem.kit,
+    image: lastDroppedItem && lastDroppedItem.image,
     isActive,
     canDrop,
   };

@@ -2,12 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import UserTemplate from 'templates/UserTemplate';
 import DragDropCustomProvider from 'providers/DnD/DragDropCustomProvider';
-import Player from 'components/molecules/Player/Player';
 import Position from 'components/molecules/Position/Position';
 import pitchImage from 'assets/images/pitch.svg';
-import selectCriteria from 'data/selectCriteria';
 import playersData from 'data/players';
-import Select from 'components/atoms/Select/Select';
+import PlayersPickerPanel from 'components/organisms/PlayersPickerPanel/PlayersPickerPanel';
 
 const ItemTypes = {
   GK: 'gkp',
@@ -30,18 +28,11 @@ const positions = [
   ItemTypes.ST,
 ];
 
-const players = playersData.map(({ name, team, kit, position }) => ({
-  name,
-  team,
-  kit,
-  type: position,
-}));
-
 const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 40px;
 `;
@@ -57,10 +48,6 @@ const StyledPitchWrapper = styled.div`
 `;
 
 const StyledPlayersColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 200px;
-  height: 100%;
   margin-right: 100px;
 `;
 
@@ -74,20 +61,8 @@ const StyledPitchRow = styled.div`
 const PlayersPage = () => (
   <UserTemplate>
     <DragDropCustomProvider
-      draggableItems={players}
       droppableItems={positions}
-      render={({ draggableItemsState, droppableItemsState, isDropped, handleDrop }) => {
-        // eslint-disable-next-line react/prop-types
-        const mapPlayerObjectToComponent = ({ name, team, kit, type }) => (
-          <Player
-            name={name}
-            team={team}
-            kit={kit}
-            position={type}
-            isDropped={isDropped(name)}
-            key={name}
-          />
-        );
+      render={({ droppableItemsState, isDropped, handleDrop }) => {
         // eslint-disable-next-line react/prop-types
         const mapPositionObjectToComponent = ({ accepts, lastDroppedItem, order }) => (
           <Position
@@ -100,8 +75,7 @@ const PlayersPage = () => (
         return (
           <StyledWrapper>
             <StyledPlayersColumn>
-              <Select items={selectCriteria} />
-              {draggableItemsState.map(mapPlayerObjectToComponent)}
+              <PlayersPickerPanel players={playersData} isDropped={isDropped}></PlayersPickerPanel>
             </StyledPlayersColumn>
             <StyledPitchWrapper>
               <StyledPitchRow>

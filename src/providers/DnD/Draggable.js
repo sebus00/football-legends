@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
 
-const Draggable = ({ kit, name, type, render }) => {
+const Draggable = ({ name, image, type, render }) => {
   const [{ isDragging }, drag] = useDrag({
-    item: { name, type, kit },
+    item: { name, image, type },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
@@ -18,8 +18,8 @@ const Draggable = ({ kit, name, type, render }) => {
 };
 
 Draggable.propTypes = {
-  kit: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
 

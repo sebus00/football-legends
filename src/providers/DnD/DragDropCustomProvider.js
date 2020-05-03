@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 
-const DragDropCustomProvider = ({ draggableItems, droppableItems, render }) => {
+const DragDropCustomProvider = ({ droppableItems, render }) => {
   const [droppableItemsState, setDroppableItemsState] = useState(
     droppableItems.map((item, index) => ({
       order: index,
@@ -10,8 +10,6 @@ const DragDropCustomProvider = ({ draggableItems, droppableItems, render }) => {
       lastDroppedItem: null,
     })),
   );
-
-  const [draggableItemsState] = useState(draggableItems);
 
   const [droppedItemNames, setDroppedItemNames] = useState([]);
 
@@ -56,7 +54,6 @@ const DragDropCustomProvider = ({ draggableItems, droppableItems, render }) => {
   );
 
   const renderProps = {
-    draggableItemsState,
     droppableItemsState,
     isDropped,
     handleDrop,
@@ -66,7 +63,6 @@ const DragDropCustomProvider = ({ draggableItems, droppableItems, render }) => {
 };
 
 DragDropCustomProvider.propTypes = {
-  draggableItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   droppableItems: PropTypes.arrayOf(PropTypes.string).isRequired,
   render: PropTypes.func.isRequired,
 };

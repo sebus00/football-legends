@@ -53,18 +53,18 @@ const StyledRow = styled.div`
   align-items: center;
 `;
 
-const Player = ({ name, team, kit, position, isDropped }) => (
+const Player = ({ name, team, position, isDropped }) => (
   <Draggable
     name={name}
-    kit={kit}
+    image={team.kit}
     type={position}
     render={({ ref, isDragging }) => (
       <StyledPlayerWrapper isUsed={isDropped || isDragging}>
-        <StyledPlayerKit kit={kit} ref={ref} />
+        <StyledPlayerKit kit={team.kit} ref={ref} />
         <StyledPlayerInfo>
           <StyledPlayerName>{name}</StyledPlayerName>
           <StyledRow>
-            <StyledPlayerTeam>{team.substring(0, 3)}</StyledPlayerTeam>
+            <StyledPlayerTeam>{team.short}</StyledPlayerTeam>
             <StyledPlayerPosition>{position}</StyledPlayerPosition>
           </StyledRow>
         </StyledPlayerInfo>
@@ -75,8 +75,12 @@ const Player = ({ name, team, kit, position, isDropped }) => (
 
 Player.propTypes = {
   name: PropTypes.string.isRequired,
-  team: PropTypes.string.isRequired,
-  kit: PropTypes.string.isRequired,
+  team: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    short: PropTypes.string,
+    kit: PropTypes.string,
+  }).isRequired,
   position: PropTypes.string.isRequired,
   isDropped: PropTypes.bool.isRequired,
 };
