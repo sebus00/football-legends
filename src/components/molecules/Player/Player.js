@@ -20,7 +20,6 @@ const StyledPlayerKit = styled.div`
   background-size: contain;
   height: calc(100% - 5px);
   width: 40px;
-  cursor: move;
 `;
 
 const StyledPlayerInfo = styled.div`
@@ -59,8 +58,8 @@ const Player = ({ name, team, position, isDropped }) => (
     image={team.kit}
     type={position}
     render={({ ref, isDragging }) => (
-      <StyledPlayerWrapper isUsed={isDropped || isDragging}>
-        <StyledPlayerKit kit={team.kit} ref={ref} />
+      <StyledPlayerWrapper ref={ref} isUsed={isDropped || isDragging}>
+        <StyledPlayerKit kit={team.kit} />
         <StyledPlayerInfo>
           <StyledPlayerName>{name}</StyledPlayerName>
           <StyledRow>

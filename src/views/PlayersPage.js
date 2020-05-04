@@ -38,26 +38,37 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledPitchWrapper = styled.div`
+  flex: 0 0 900px;
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+`;
+
+const StyledPitch = styled.div`
   background-image: url(${pitchImage});
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
-  height: 600px;
-  width: 800px;
-  padding: 40px 110px;
+  height: 700px;
+  max-width: 1100px;
+  flex: 0 0 1100px;
+  padding: 0px 130px 120px 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const StyledPlayersColumn = styled.div`
-  margin-right: 100px;
+  margin-right: 50px;
   flex: 0 0 200px;
-  height: 710px;
+  height: 720px;
 `;
 
 const StyledPitchRow = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 35px;
 `;
 
 const PlayersPage = () => (
@@ -80,18 +91,20 @@ const PlayersPage = () => (
               <PlayersPickerPanel players={playersData} isDropped={isDropped}></PlayersPickerPanel>
             </StyledPlayersColumn>
             <StyledPitchWrapper>
-              <StyledPitchRow>
-                {droppableItemsState.slice(0, 1).map(mapPositionObjectToComponent)}
-              </StyledPitchRow>
-              <StyledPitchRow>
-                {droppableItemsState.slice(1, 5).map(mapPositionObjectToComponent)}
-              </StyledPitchRow>
-              <StyledPitchRow>
-                {droppableItemsState.slice(5, 8).map(mapPositionObjectToComponent)}
-              </StyledPitchRow>
-              <StyledPitchRow>
-                {droppableItemsState.slice(8, 11).map(mapPositionObjectToComponent)}
-              </StyledPitchRow>
+              <StyledPitch>
+                <StyledPitchRow>
+                  {droppableItemsState.slice(0, 1).map(mapPositionObjectToComponent)}
+                </StyledPitchRow>
+                <StyledPitchRow>
+                  {droppableItemsState.slice(1, 5).map(mapPositionObjectToComponent)}
+                </StyledPitchRow>
+                <StyledPitchRow>
+                  {droppableItemsState.slice(5, 8).map(mapPositionObjectToComponent)}
+                </StyledPitchRow>
+                <StyledPitchRow>
+                  {droppableItemsState.slice(8, 11).map(mapPositionObjectToComponent)}
+                </StyledPitchRow>
+              </StyledPitch>
             </StyledPitchWrapper>
           </StyledWrapper>
         );

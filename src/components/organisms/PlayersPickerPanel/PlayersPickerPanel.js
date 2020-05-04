@@ -15,6 +15,11 @@ const StyledWrapper = styled.div`
   justify-content: flex-start;
 `;
 
+const StyledPanelHeading = styled.p`
+  background-color: ${({ theme }) => theme.color.secondary} !important;
+  color: ${({ theme }) => theme.color.white} !important;
+`;
+
 const StyledColumn = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,7 +38,7 @@ const StyledPagination = styled(StyledRow)`
 `;
 
 const StyledPlayer = styled.div`
-  cursor: pointer;
+  cursor: move;
   width: 100%;
 
   :hover {
@@ -42,6 +47,7 @@ const StyledPlayer = styled.div`
 `;
 
 const PlayersPickerPanel = ({ players, isDropped }) => {
+  const playersPerPage = 10;
   // eslint-disable-next-line react/prop-types
   const mapPlayerObjectToComponent = ({ name, team, position }) => (
     <StyledPlayer key={name}>
@@ -73,8 +79,8 @@ const PlayersPickerPanel = ({ players, isDropped }) => {
   });
 
   return (
-    <StyledWrapper className="panel is-primary">
-      <p className="panel-heading">Players Selection</p>
+    <StyledWrapper className="panel">
+      <StyledPanelHeading className="panel-heading">Players Selection</StyledPanelHeading>
       <StyledRow className="panel-block">
         <Select
           items={selectCriteria}
@@ -84,7 +90,7 @@ const PlayersPickerPanel = ({ players, isDropped }) => {
       </StyledRow>
       <StyledColumn className="panel-block">
         {filteredPlayers
-          .slice(10 * paginationPage, 10 * (paginationPage + 1))
+          .slice(playersPerPage * paginationPage, playersPerPage * (paginationPage + 1))
           .map(mapPlayerObjectToComponent)}
       </StyledColumn>
       <div className="spacer" />
@@ -92,7 +98,7 @@ const PlayersPickerPanel = ({ players, isDropped }) => {
         <Pagination
           current={paginationPage}
           onChange={onPageChange}
-          max={Math.floor((filteredPlayers.length - 1) / 10)}
+          max={Math.floor((filteredPlayers.length - 1) / playersPerPage)}
         />
       </StyledPagination>
     </StyledWrapper>

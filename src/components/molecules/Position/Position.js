@@ -7,7 +7,7 @@ import emptyKit from 'assets/images/kits/empty.png';
 const StyledPlayerWrapper = styled.div`
   position: relative;
   z-index: 1;
-  padding: 10px;
+  padding: 15px 30px;
 
   ::after {
     content: '';
@@ -29,7 +29,7 @@ const StyledPlayerKit = styled.div`
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
-  height: 65px;
+  height: 90px;
   width: 70px;
 `;
 

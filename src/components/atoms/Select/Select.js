@@ -10,12 +10,13 @@ const StyledSelectWrapper = styled.div`
 
 const StyledSelect = styled.select`
   width: 100%;
+  border-color: ${({ theme }) => theme.color.secondary} !important;
 `;
 
 const Select = ({ items, value, onChange }) => {
   return (
     <StyledControl className="control">
-      <StyledSelectWrapper className="select is-rounded is-large is-primary">
+      <StyledSelectWrapper className="select is-rounded is-large">
         <StyledSelect value={value} onChange={onChange}>
           {items.map(({ type, typeLabel, typeItems }) => (
             <optgroup label={typeLabel} key={type}>
