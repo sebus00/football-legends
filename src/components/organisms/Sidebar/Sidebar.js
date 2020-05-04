@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import logoIcon from 'assets/icons/logo.png';
 import playersIcon from 'assets/icons/players.svg';
-import clubsIcon from 'assets/icons/clubs.svg';
+import teamsIcon from 'assets/icons/teams.svg';
 import coachesIcon from 'assets/icons/coaches.svg';
 import stadiumsIcon from 'assets/icons/stadiums.svg';
 import logoutIcon from 'assets/icons/logout.svg';
@@ -64,7 +64,7 @@ const Sidebar = () => (
         <ButtonIcon as={NavLink} to="/players" icon={playersIcon} activeclass="active" />
       </StyledMenuItem>
       <StyledMenuItem>
-        <ButtonIcon as={NavLink} to="/clubs" icon={clubsIcon} activeclass="active" />
+        <ButtonIcon as={NavLink} to="/teams" icon={teamsIcon} activeclass="active" />
       </StyledMenuItem>
       <StyledMenuItem>
         <ButtonIcon as={NavLink} to="/coaches" icon={coachesIcon} activeclass="active" />

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Select from 'components/atoms/Select/Select';
 import Player from 'components/molecules/Player/Player';
 import Pagination from 'components/molecules/Pagination/Pagination';
-import selectCriteria from 'data/selectCriteria';
+import selectCriteria from './selectCriteria';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -105,7 +106,14 @@ const PlayersPickerPanel = ({ players, isDropped }) => {
 };
 
 PlayersPickerPanel.propTypes = {
-  players: PropTypes.arrayOf(PropTypes.object),
+  players: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      team: PropTypes.object.isRequired,
+      position: PropTypes.string.isRequired,
+    }),
+  ),
   isDropped: PropTypes.func.isRequired,
 };
 
@@ -113,4 +121,6 @@ PlayersPickerPanel.defaultProps = {
   players: [],
 };
 
-export default PlayersPickerPanel;
+const mapStateToProps = players => players;
+
+export default connect(mapStateToProps)(PlayersPickerPanel);

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import UserTemplate from 'templates/UserTemplate';
 import DragDropCustomProvider from 'providers/DnD/DragDropCustomProvider';
-import playersData from 'data/players';
 import PlayersPickerPanel from 'components/organisms/PlayersPickerPanel/PlayersPickerPanel';
 import Pitch from 'components/organisms/Pitch/Pitch';
 
@@ -59,7 +58,7 @@ const PlayersPage = () => (
         return (
           <StyledWrapper>
             <StyledPlayersColumn>
-              <PlayersPickerPanel players={playersData} isDropped={isDropped}></PlayersPickerPanel>
+              <PlayersPickerPanel isDropped={isDropped}></PlayersPickerPanel>
             </StyledPlayersColumn>
             <StyledPitchWrapper>
               <Pitch
