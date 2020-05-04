@@ -1,7 +1,8 @@
 export const routes = {
   home: '/',
   players: '/players',
-  clubs: '/clubs',
+  teams: '/teams',
   coaches: '/coaches',
   stadiums: '/stadiums',
+  stadium: '/stadiums/details/:id',
 };

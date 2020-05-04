@@ -4,9 +4,10 @@ import { routes } from 'routes';
 import MainTemplate from 'templates/MainTemplate';
 import HomePage from './HomePage';
 import PlayersPage from './PlayersPage';
-import ClubsPage from './ClubsPage';
+import TeamsPage from './TeamsPage';
 import CoachesPage from './CoachesPage';
-import StadiumPages from './StadiumsPage';
+import StadiumPage from './StadiumsPage';
+import StadiumDetailsPage from './StadiumDetailsPage';
 
 const Root = () => (
   <BrowserRouter>
@@ -14,9 +15,10 @@ const Root = () => (
       <Switch>
         <Route exact path={routes.home} component={HomePage} />
         <Route exact path={routes.players} component={PlayersPage} />
-        <Route exact path={routes.clubs} component={ClubsPage} />
+        <Route exact path={routes.teams} component={TeamsPage} />
         <Route exact path={routes.coaches} component={CoachesPage} />
-        <Route exact path={routes.stadiums} component={StadiumPages} />
+        <Route exact path={routes.stadiums} component={StadiumPage} />
+        <Route path={routes.stadium} component={StadiumDetailsPage} />
       </Switch>
     </MainTemplate>
   </BrowserRouter>

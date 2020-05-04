@@ -14,13 +14,13 @@ const StyledWrapper = styled.div`
 `;
 
 const UserPageTemplate = ({ children }) => (
-  <StyledWrapper>
-    <Sidebar />
-    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+  <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+    <StyledWrapper>
+      <Sidebar />
       {children}
-    </DndProvider>
-    <FlatIconsInfo />
-  </StyledWrapper>
+      <FlatIconsInfo />
+    </StyledWrapper>
+  </DndProvider>
 );
 
 UserPageTemplate.propTypes = {

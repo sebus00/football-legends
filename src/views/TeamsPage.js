@@ -1,10 +1,10 @@
 import React from 'react';
 import UserTemplate from 'templates/UserTemplate';
 
-const ClubsPage = () => (
+const TeamsPage = () => (
   <UserTemplate>
-    <div>Clubs</div>
+    <div>Teams</div>
   </UserTemplate>
 );
 
-export default ClubsPage;
+export default TeamsPage;
