@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyledControl = styled.div`
-  margin-bottom: 10px;
-`;
+const StyledControl = styled.div``;
 
 const StyledSelectWrapper = styled.div`
   width: 100%;

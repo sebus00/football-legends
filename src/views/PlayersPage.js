@@ -34,7 +34,7 @@ const StyledWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 40px;
+  padding: 30px;
 `;
 
 const StyledPitchWrapper = styled.div`
@@ -49,6 +49,8 @@ const StyledPitchWrapper = styled.div`
 
 const StyledPlayersColumn = styled.div`
   margin-right: 100px;
+  flex: 0 0 200px;
+  height: 710px;
 `;
 
 const StyledPitchRow = styled.div`

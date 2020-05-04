@@ -7,7 +7,7 @@ import emptyKit from 'assets/images/kits/empty.png';
 const StyledPlayerWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 200px;
+  width: 100%;
   height: 55px;
   padding: 4px;
   opacity: ${({ isUsed }) => (isUsed ? '.4' : '1')};
