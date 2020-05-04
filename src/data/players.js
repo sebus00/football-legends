@@ -7,6 +7,7 @@ import chelseaKit from 'assets/images/kits/chelsea.png';
 
 const players = [
   {
+    id: 1,
     name: 'David Luiz',
     team: {
       id: 1,
@@ -17,6 +18,7 @@ const players = [
     position: 'def',
   },
   {
+    id: 2,
     name: 'Salah',
     team: {
       id: 2,
@@ -27,6 +29,7 @@ const players = [
     position: 'mid',
   },
   {
+    id: 3,
     name: 'Mahrez',
     team: {
       id: 3,
@@ -37,6 +40,7 @@ const players = [
     position: 'mid',
   },
   {
+    id: 4,
     name: 'Rashford',
     team: {
       id: 4,
@@ -47,6 +51,7 @@ const players = [
     position: 'fwd',
   },
   {
+    id: 5,
     name: 'Aurier',
     team: {
       id: 5,
@@ -57,6 +62,7 @@ const players = [
     position: 'def',
   },
   {
+    id: 6,
     name: 'Kepa',
     team: {
       id: 6,
@@ -67,6 +73,7 @@ const players = [
     position: 'gkp',
   },
   {
+    id: 7,
     name: 'Aubameyang',
     team: {
       id: 1,
@@ -77,6 +84,7 @@ const players = [
     position: 'fwd',
   },
   {
+    id: 8,
     name: 'Williams',
     team: {
       id: 4,
@@ -87,6 +95,7 @@ const players = [
     position: 'def',
   },
   {
+    id: 9,
     name: 'Pepe',
     team: {
       id: 1,
@@ -97,6 +106,7 @@ const players = [
     position: 'mid',
   },
   {
+    id: 10,
     name: 'Alisson',
     team: {
       id: 2,
@@ -107,6 +117,7 @@ const players = [
     position: 'gkp',
   },
   {
+    id: 11,
     name: 'Ederson',
     team: {
       id: 3,

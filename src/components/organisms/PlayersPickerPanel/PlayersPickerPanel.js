@@ -49,9 +49,9 @@ const StyledPlayer = styled.div`
 const PlayersPickerPanel = ({ players, isDropped }) => {
   const playersPerPage = 10;
   // eslint-disable-next-line react/prop-types
-  const mapPlayerObjectToComponent = ({ name, team, position }) => (
-    <StyledPlayer key={name}>
-      <Player name={name} team={team} position={position} isDropped={isDropped(name)} />
+  const mapPlayerObjectToComponent = ({ id, name, team, position }) => (
+    <StyledPlayer key={id}>
+      <Player id={id} name={name} team={team} position={position} isDropped={isDropped(name)} />
     </StyledPlayer>
   );
 
@@ -93,7 +93,6 @@ const PlayersPickerPanel = ({ players, isDropped }) => {
           .slice(playersPerPage * paginationPage, playersPerPage * (paginationPage + 1))
           .map(mapPlayerObjectToComponent)}
       </StyledColumn>
-      <div className="spacer" />
       <StyledPagination className="panel-block">
         <Pagination
           current={paginationPage}

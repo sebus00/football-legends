@@ -52,8 +52,9 @@ const StyledRow = styled.div`
   align-items: center;
 `;
 
-const Player = ({ name, team, position, isDropped }) => (
+const Player = ({ id, name, team, position, isDropped }) => (
   <Draggable
+    id={id}
     name={name}
     image={team.kit}
     type={position}
@@ -73,6 +74,7 @@ const Player = ({ name, team, position, isDropped }) => (
 );
 
 Player.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   team: PropTypes.shape({
     id: PropTypes.number,

@@ -11,27 +11,25 @@ const DragDropCustomProvider = ({ droppableItems, render }) => {
     })),
   );
 
-  const [droppedItemNames, setDroppedItemNames] = useState([]);
+  const [droppedItemIds, setDroppedItemIds] = useState([]);
 
-  const isDropped = itemName => {
-    return droppedItemNames.indexOf(itemName) > -1;
+  const isDropped = itemId => {
+    return droppedItemIds.indexOf(itemId) > -1;
   };
 
   const handleDrop = useCallback(
     (index, item) => {
-      const { name } = item;
-
-      const isAlreadyDropped = droppedItemNames.includes(name);
+      const { id } = item;
+      const isAlreadyDropped = droppedItemIds.includes(id);
       const previousDroppedItem = droppableItemsState[index].lastDroppedItem;
-      const newDroppableItems = [...droppedItemNames, ...(!isAlreadyDropped ? [name] : [])].filter(
-        itemName =>
-          !previousDroppedItem || itemName !== previousDroppedItem.name || itemName === name,
+      const newDroppableItems = [...droppedItemIds, ...(!isAlreadyDropped ? [id] : [])].filter(
+        itemId => !previousDroppedItem || itemId !== previousDroppedItem.id || itemId === id,
       );
 
-      setDroppedItemNames(newDroppableItems);
+      setDroppedItemIds(newDroppableItems);
 
       const sameItem = droppableItemsState.find(
-        ({ lastDroppedItem }) => lastDroppedItem && lastDroppedItem.name === item.name,
+        ({ lastDroppedItem }) => lastDroppedItem && lastDroppedItem.id === item.id,
       );
       const newDroppableData = {
         ...(sameItem && {
@@ -50,13 +48,32 @@ const DragDropCustomProvider = ({ droppableItems, render }) => {
 
       setDroppableItemsState(update(droppableItemsState, newDroppableData));
     },
-    [droppedItemNames, droppableItemsState],
+    [droppedItemIds, droppableItemsState],
+  );
+
+  const handleRemove = useCallback(
+    id => {
+      setDroppedItemIds(droppedItemIds.filter(item => item !== id));
+      const index = droppableItemsState.findIndex(
+        ({ lastDroppedItem }) => lastDroppedItem && lastDroppedItem.id === id,
+      );
+      const newDroppableData = {
+        [index]: {
+          lastDroppedItem: {
+            $set: null,
+          },
+        },
+      };
+      setDroppableItemsState(update(droppableItemsState, newDroppableData));
+    },
+    [droppedItemIds, droppableItemsState],
   );
 
   const renderProps = {
     droppableItemsState,
     isDropped,
     handleDrop,
+    handleRemove,
   };
 
   return render(renderProps);
