@@ -9,6 +9,7 @@ const initialState = {
     { id: 'mid', label: 'Midfielder', plural: 'Midfielders' },
     { id: 'fwd', label: 'Forward', plural: 'Forwards' },
   ],
+  stadiums: [],
 };
 
 const rootReducer = (state = initialState, action) => {

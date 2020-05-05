@@ -154,6 +154,7 @@ PlayersPickerPanel.propTypes = {
       name: PropTypes.string.isRequired,
       short: PropTypes.string.isRequired,
       kit: PropTypes.string.isRequired,
+      badge: PropTypes.string.isRequired,
     }),
   ),
   positions: PropTypes.arrayOf(

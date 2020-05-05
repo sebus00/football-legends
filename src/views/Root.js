@@ -8,7 +8,7 @@ import HomePage from './HomePage';
 import PlayersPage from './PlayersPage';
 import TeamsPage from './TeamsPage';
 import CoachesPage from './CoachesPage';
-import StadiumPage from './StadiumsPage';
+import StadiumsPage from './StadiumsPage';
 import StadiumDetailsPage from './StadiumDetailsPage';
 
 const Root = () => (
@@ -20,7 +20,7 @@ const Root = () => (
           <Route exact path={routes.players} component={PlayersPage} />
           <Route exact path={routes.teams} component={TeamsPage} />
           <Route exact path={routes.coaches} component={CoachesPage} />
-          <Route exact path={routes.stadiums} component={StadiumPage} />
+          <Route exact path={routes.stadiums} component={StadiumsPage} />
           <Route path={routes.stadium} component={StadiumDetailsPage} />
         </Switch>
       </MainTemplate>

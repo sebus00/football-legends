@@ -26,5 +26,6 @@ yarn-error.log*
 .netlify
 
 /src/assets/images/kits
+/src/assets/images/stadiums
 /src/assets/videos
 /src/assets/data

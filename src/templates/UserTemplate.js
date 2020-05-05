@@ -10,7 +10,7 @@ const StyledWrapper = styled.div`
   background: ${({ theme }) => theme.color.primary};
 `;
 
-const UserPageTemplate = ({ children }) => (
+const UserTemplate = ({ children }) => (
   <StyledWrapper>
     <Sidebar />
     {children}
@@ -18,8 +18,8 @@ const UserPageTemplate = ({ children }) => (
   </StyledWrapper>
 );
 
-UserPageTemplate.propTypes = {
+UserTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
 };
 
-export default UserPageTemplate;
+export default UserTemplate;
