@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchItems } from 'store/actions';
 import styled from 'styled-components';
 import UserTemplate from 'templates/UserTemplate';
 import DragDropCustomProvider from 'providers/DnD/DragDropCustomProvider';
@@ -32,7 +31,7 @@ const StyledPitchWrapper = styled.div`
   overflow: hidden;
 `;
 
-const PlayersPage = ({ players, fetchPlayers, teams, fetchTeams, positions }) => {
+const PlayersPage = ({ positions }) => {
   const positionsFormation =
     positions.length > 0
       ? [
@@ -49,11 +48,6 @@ const PlayersPage = ({ players, fetchPlayers, teams, fetchTeams, positions }) =>
           positions[3].id,
         ]
       : [];
-
-  useEffect(() => {
-    if (players.length === 0) fetchPlayers();
-    if (teams.length === 0) fetchTeams();
-  }, []);
 
   return (
     <UserTemplate>
@@ -81,25 +75,6 @@ const PlayersPage = ({ players, fetchPlayers, teams, fetchTeams, positions }) =>
 };
 
 PlayersPage.propTypes = {
-  players: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired,
-      team: PropTypes.object.isRequired,
-      position: PropTypes.string.isRequired,
-    }),
-  ),
-  fetchPlayers: PropTypes.func.isRequired,
-  teams: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      short: PropTypes.string.isRequired,
-      kit: PropTypes.string.isRequired,
-    }),
-  ),
-  fetchTeams: PropTypes.func.isRequired,
   positions: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -110,18 +85,11 @@ PlayersPage.propTypes = {
 };
 
 PlayersPage.defaultProps = {
-  players: [],
-  teams: [],
   positions: [],
 };
 
-const mapStateToProps = ({ players, teams, positions }) => {
-  return { players, teams, positions };
+const mapStateToProps = ({ positions }) => {
+  return { positions };
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchPlayers: () => dispatch(fetchItems('players')),
-  fetchTeams: () => dispatch(fetchItems('teams')),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlayersPage);
+export default connect(mapStateToProps)(PlayersPage);

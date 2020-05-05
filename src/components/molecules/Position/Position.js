@@ -45,6 +45,7 @@ const StyledPlayerName = styled.div`
   font-size: ${({ theme }) => theme.fontSize.s};
   padding: 2px 15px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
 `;
 
 const StyledCloseButton = styled.button`
