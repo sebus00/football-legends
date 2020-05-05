@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Droppable from 'providers/DnD/Droppable';
-import emptyKit from 'assets/images/kits/empty.png';
+import emptyKit from 'assets/images/empty-kit.png';
 
 const StyledPlayerWrapper = styled.div`
   position: relative;

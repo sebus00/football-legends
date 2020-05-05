@@ -1,30 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchItems } from 'store/actions';
 import styled from 'styled-components';
 import UserTemplate from 'templates/UserTemplate';
 import DragDropCustomProvider from 'providers/DnD/DragDropCustomProvider';
 import PlayersPickerPanel from 'components/organisms/PlayersPickerPanel/PlayersPickerPanel';
 import Pitch from 'components/organisms/Pitch/Pitch';
-
-const ItemTypes = {
-  GK: 'gkp',
-  DEF: 'def',
-  MID: 'mid',
-  ST: 'fwd',
-};
-
-const positions = [
-  ItemTypes.GK,
-  ItemTypes.DEF,
-  ItemTypes.DEF,
-  ItemTypes.DEF,
-  ItemTypes.DEF,
-  ItemTypes.MID,
-  ItemTypes.MID,
-  ItemTypes.MID,
-  ItemTypes.ST,
-  ItemTypes.ST,
-  ItemTypes.ST,
-];
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -50,28 +32,96 @@ const StyledPitchWrapper = styled.div`
   overflow: hidden;
 `;
 
-const PlayersPage = () => (
-  <UserTemplate>
-    <DragDropCustomProvider
-      droppableItems={positions}
-      render={({ droppableItemsState, isDropped, handleDrop, handleRemove }) => {
-        return (
-          <StyledWrapper>
-            <StyledPlayersColumn>
-              <PlayersPickerPanel isDropped={isDropped}></PlayersPickerPanel>
-            </StyledPlayersColumn>
-            <StyledPitchWrapper>
-              <Pitch
-                positions={droppableItemsState}
-                handleDrop={handleDrop}
-                handleRemove={handleRemove}
-              />
-            </StyledPitchWrapper>
-          </StyledWrapper>
-        );
-      }}
-    />
-  </UserTemplate>
-);
+const PlayersPage = ({ players, fetchPlayers, teams, fetchTeams, positions }) => {
+  const positionsFormation =
+    positions.length > 0
+      ? [
+          positions[0].id,
+          positions[1].id,
+          positions[1].id,
+          positions[1].id,
+          positions[1].id,
+          positions[2].id,
+          positions[2].id,
+          positions[2].id,
+          positions[3].id,
+          positions[3].id,
+          positions[3].id,
+        ]
+      : [];
 
-export default PlayersPage;
+  useEffect(() => {
+    if (players.length === 0) fetchPlayers();
+    if (teams.length === 0) fetchTeams();
+  }, []);
+
+  return (
+    <UserTemplate>
+      <DragDropCustomProvider
+        droppableItems={positionsFormation}
+        render={({ droppableItemsState, isDropped, handleDrop, handleRemove }) => {
+          return (
+            <StyledWrapper>
+              <StyledPlayersColumn>
+                <PlayersPickerPanel isDropped={isDropped}></PlayersPickerPanel>
+              </StyledPlayersColumn>
+              <StyledPitchWrapper>
+                <Pitch
+                  positions={droppableItemsState}
+                  handleDrop={handleDrop}
+                  handleRemove={handleRemove}
+                />
+              </StyledPitchWrapper>
+            </StyledWrapper>
+          );
+        }}
+      />
+    </UserTemplate>
+  );
+};
+
+PlayersPage.propTypes = {
+  players: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      team: PropTypes.object.isRequired,
+      position: PropTypes.string.isRequired,
+    }),
+  ),
+  fetchPlayers: PropTypes.func.isRequired,
+  teams: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      short: PropTypes.string.isRequired,
+      kit: PropTypes.string.isRequired,
+    }),
+  ),
+  fetchTeams: PropTypes.func.isRequired,
+  positions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      plural: PropTypes.string.isRequired,
+    }),
+  ),
+};
+
+PlayersPage.defaultProps = {
+  players: [],
+  teams: [],
+  positions: [],
+};
+
+const mapStateToProps = ({ players, teams, positions }) => {
+  return { players, teams, positions };
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchPlayers: () => dispatch(fetchItems('players')),
+  fetchTeams: () => dispatch(fetchItems('teams')),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayersPage);

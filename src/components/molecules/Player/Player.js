@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Draggable from 'providers/DnD/Draggable';
-import emptyKit from 'assets/images/kits/empty.png';
+import emptyKit from 'assets/images/empty-kit.png';
 
 const StyledPlayerWrapper = styled.div`
   display: flex;
@@ -52,17 +52,17 @@ const StyledRow = styled.div`
   align-items: center;
 `;
 
-const Player = ({ id, name, team, position, isDropped }) => (
+const Player = ({ id, firstName, lastName, team, position, isDropped }) => (
   <Draggable
     id={id}
-    name={name}
+    name={`${lastName} ${firstName[0]}.`}
     image={team.kit}
     type={position}
     render={({ ref, isDragging }) => (
       <StyledPlayerWrapper ref={ref} isUsed={isDropped || isDragging}>
         <StyledPlayerKit kit={team.kit} />
         <StyledPlayerInfo>
-          <StyledPlayerName>{name}</StyledPlayerName>
+          <StyledPlayerName>{`${lastName} ${firstName[0]}.`}</StyledPlayerName>
           <StyledRow>
             <StyledPlayerTeam>{team.short}</StyledPlayerTeam>
             <StyledPlayerPosition>{position}</StyledPlayerPosition>
@@ -75,10 +75,11 @@ const Player = ({ id, name, team, position, isDropped }) => (
 
 Player.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
   team: PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string,
+    name: PropTypes.string.isRequired,
     short: PropTypes.string,
     kit: PropTypes.string,
   }).isRequired,

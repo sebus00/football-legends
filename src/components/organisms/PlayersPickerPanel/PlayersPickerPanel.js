@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Select from 'components/atoms/Select/Select';
 import Player from 'components/molecules/Player/Player';
 import Pagination from 'components/molecules/Pagination/Pagination';
-import selectCriteria from './selectCriteria';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -47,14 +46,48 @@ const StyledPlayer = styled.div`
   }
 `;
 
-const PlayersPickerPanel = ({ players, isDropped }) => {
+const PlayersPickerPanel = ({ players, teams, positions, isDropped }) => {
   const playersPerPage = 10;
   // eslint-disable-next-line react/prop-types
-  const mapPlayerObjectToComponent = ({ id, name, team, position }) => (
+  const mapPlayerObjectToComponent = ({ id, firstName, lastName, team, position }) => (
     <StyledPlayer key={id}>
-      <Player id={id} name={name} team={team} position={position} isDropped={isDropped(name)} />
+      <Player
+        id={id}
+        firstName={firstName}
+        lastName={lastName}
+        team={team}
+        position={position}
+        isDropped={isDropped(id)}
+      />
     </StyledPlayer>
   );
+
+  const [selectCriteria, setSelectCriteria] = useState([
+    {
+      type: 'global',
+      typeLabel: 'Global',
+      typeItems: [{ key: 'all', label: 'All players' }],
+    },
+    ...(positions.length > 0
+      ? [
+          {
+            type: 'position',
+            typeLabel: 'By postion',
+            typeItems: positions.map(({ id, plural }) => ({ key: id, label: plural })),
+          },
+        ]
+      : []),
+  ]);
+
+  useEffect(() => {
+    const teamsCriteria = {
+      type: 'team',
+      typeLabel: 'By team',
+      typeItems: teams.map(({ id, name }) => ({ key: id, label: name })),
+    };
+
+    setSelectCriteria([...selectCriteria, ...(teams.length > 0 ? [teamsCriteria] : [])]);
+  }, [teams]);
 
   const [selectedValue, setSelectedValue] = useState({
     ...selectCriteria[0].typeItems[0],
@@ -109,9 +142,25 @@ PlayersPickerPanel.propTypes = {
   players: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
       team: PropTypes.object.isRequired,
       position: PropTypes.string.isRequired,
+    }),
+  ),
+  teams: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      short: PropTypes.string.isRequired,
+      kit: PropTypes.string.isRequired,
+    }),
+  ),
+  positions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      plural: PropTypes.string.isRequired,
     }),
   ),
   isDropped: PropTypes.func.isRequired,
@@ -119,8 +168,12 @@ PlayersPickerPanel.propTypes = {
 
 PlayersPickerPanel.defaultProps = {
   players: [],
+  teams: [],
+  positions: [],
 };
 
-const mapStateToProps = players => players;
+const mapStateToProps = ({ players, teams, positions }) => {
+  return { players, teams, positions };
+};
 
 export default connect(mapStateToProps)(PlayersPickerPanel);
