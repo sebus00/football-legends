@@ -85,8 +85,7 @@ const PlayersPickerPanel = ({ players, teams, positions, isDropped }) => {
       typeLabel: 'By team',
       typeItems: teams.map(({ id, name }) => ({ key: id, label: name })),
     };
-
-    setSelectCriteria([...selectCriteria, ...(teams.length > 0 ? [teamsCriteria] : [])]);
+    setSelectCriteria(state => [...state, ...(teams.length > 0 ? [teamsCriteria] : [])]);
   }, [teams]);
 
   const [selectedValue, setSelectedValue] = useState({
